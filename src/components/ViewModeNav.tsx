@@ -98,13 +98,13 @@ export const ViewModeNav: React.FC<Props> = ({ shootMode, onShootModeChange }) =
             />
           )}
 
-          <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-400
+          <div className={`w-8 h-8 rounded-md flex items-center justify-center transition-all duration-400
             ${shootMode === "studio"
-              ? "bg-gradient-to-br from-[#c5a059] to-[#b8860b] text-black shadow-lg shadow-[#c5a059]/20"
-              : "bg-white/[0.04] text-white/20"
+              ? "bg-[#c5a059] text-black"
+              : "bg-white/[0.04] text-white/50"
             }`}
           >
-            <Camera size={15} strokeWidth={1.8} />
+            <Camera size={16} strokeWidth={1.8} />
           </div>
 
           <div className="text-center relative z-10">
@@ -151,13 +151,13 @@ export const ViewModeNav: React.FC<Props> = ({ shootMode, onShootModeChange }) =
             />
           )}
 
-          <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-400
+          <div className={`w-8 h-8 rounded-md flex items-center justify-center transition-all duration-400
             ${shootMode === "location"
-              ? "bg-gradient-to-br from-[#59c5a0] to-[#3a9e7a] text-black shadow-lg shadow-[#59c5a0]/20"
-              : "bg-white/[0.04] text-white/20"
+              ? "bg-[#59c5a0] text-black"
+              : "bg-white/[0.04] text-white/50"
             }`}
           >
-            <MapPin size={15} strokeWidth={1.8} />
+            <MapPin size={16} strokeWidth={1.8} />
           </div>
 
           <div className="text-center relative z-10">
@@ -220,12 +220,11 @@ export const ViewModeNav: React.FC<Props> = ({ shootMode, onShootModeChange }) =
                   {/* Icon */}
                   <div
                     className={`w-7 h-7 rounded-md flex items-center justify-center flex-shrink-0 transition-all duration-300
-                      ${isActive ? "text-black" : "bg-white/[0.03] text-white/20"}`}
+                      ${isActive ? "text-black" : "bg-white/[0.03] text-white/50"}`}
                     style={
                       isActive
                         ? {
-                            background: `linear-gradient(135deg, ${tab.color}, ${tab.color}cc)`,
-                            boxShadow: `0 4px 12px ${tab.color}30`,
+                            background: tab.color,
                           }
                         : {}
                     }
@@ -295,10 +294,9 @@ export const ViewModeNav: React.FC<Props> = ({ shootMode, onShootModeChange }) =
               )}
               <div
                 className={`w-7 h-7 rounded-md flex items-center justify-center flex-shrink-0 transition-all duration-300
-                  ${activeKey === "location" ? "text-black" : "bg-white/[0.03] text-white/20"}`}
+                  ${activeKey === "location" ? "text-black" : "bg-white/[0.03] text-white/50"}`}
                 style={activeKey === "location" ? {
-                  background: "linear-gradient(135deg, #59c5a0, #59c5a0cc)",
-                  boxShadow: "0 4px 12px rgba(89, 197, 160, 0.3)",
+                  background: "#59c5a0",
                 } : {}}
               >
                 <MapPin size={16} strokeWidth={1.8} />
@@ -338,10 +336,9 @@ export const ViewModeNav: React.FC<Props> = ({ shootMode, onShootModeChange }) =
               )}
               <div
                 className={`w-7 h-7 rounded-md flex items-center justify-center flex-shrink-0 transition-all duration-300
-                  ${activeKey === "location-closeup" ? "text-black" : "bg-white/[0.03] text-white/20"}`}
+                  ${activeKey === "location-closeup" ? "text-black" : "bg-white/[0.03] text-white/50"}`}
                 style={activeKey === "location-closeup" ? {
-                  background: "linear-gradient(135deg, #a0c559, #a0c559cc)",
-                  boxShadow: "0 4px 12px rgba(160, 197, 89, 0.3)",
+                  background: "#a0c559",
                 } : {}}
               >
                 <Focus size={16} strokeWidth={1.8} />

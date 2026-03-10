@@ -67,7 +67,7 @@ export const ImageUploader: React.FC<Props> = ({ label, onUpload, isLoading = fa
   return (
     <div className="flex flex-col gap-3">
       <div className="flex justify-between items-center px-1">
-        <label className="text-[10px] font-bold tracking-[0.25em] text-white/25 uppercase">{label}</label>
+        <label className="text-[11px] font-medium tracking-[0.1em] text-white/40 uppercase">{label}</label>
         <AnimatePresence>
           {preview && !localLoading && (
             <motion.div
@@ -86,8 +86,8 @@ export const ImageUploader: React.FC<Props> = ({ label, onUpload, isLoading = fa
       <motion.div
         whileHover={!preview ? { scale: 1.01 } : {}}
         className={`dropzone-container group h-[180px] flex items-center justify-center relative overflow-hidden card-glass
-          ${preview ? 'border-solid border-[#c5a059]/20 bg-black/40' : ''}
-          ${isDragging ? 'border-[#c5a059] bg-[#c5a059]/5 scale-[1.02]' : ''}
+          ${preview ? 'border-solid border-white/10 bg-black/40' : ''}
+          ${isDragging ? 'border-white/30 bg-white/5 scale-[1.02]' : ''}
         `}
         onClick={() => !localLoading && !isLoading && fileInputRef.current?.click()}
         onDragOver={handleDragOver}
@@ -153,13 +153,13 @@ export const ImageUploader: React.FC<Props> = ({ label, onUpload, isLoading = fa
               className="flex flex-col items-center gap-5 z-10"
             >
               <motion.div
-                animate={isDragging ? { scale: 1.2, borderColor: 'rgba(197, 160, 89, 0.4)' } : {}}
-                className="w-12 h-12 rounded-2xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-center text-white/10 group-hover:text-[#c5a059]/60 transition-all duration-500 group-hover:scale-110 group-hover:bg-[#c5a059]/5 group-hover:border-[#c5a059]/20"
+                animate={isDragging ? { scale: 1.1, borderColor: 'rgba(255, 255, 255, 0.2)' } : {}}
+                className="w-12 h-12 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-center text-white/30 group-hover:text-white/60 transition-all duration-300 group-hover:bg-white/[0.04]"
               >
                 <ImageIcon size={20} />
               </motion.div>
               <div className="text-center space-y-1.5">
-                <p className="text-[10px] font-bold text-white/20 uppercase tracking-[0.3em] group-hover:text-white/50 transition-colors duration-300">Kaynak Seç</p>
+                <p className="text-[10px] font-bold text-white/40 uppercase tracking-[0.2em] group-hover:text-white/60 transition-colors duration-300">Kaynak Seç</p>
                 <p className="text-[9px] text-white/8 font-medium">veya sürükle-bırak</p>
               </div>
             </motion.div>

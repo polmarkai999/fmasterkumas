@@ -173,8 +173,6 @@ const App: React.FC = () => {
 
   return (
     <div className="app-container">
-      <FloatingParticles />
-
       {/* ─── Sidebar Control Panel ─── */}
       <aside className="sidebar">
         <div className="sidebar-header flex flex-col items-center justify-center pt-12 pb-2">
@@ -206,10 +204,7 @@ const App: React.FC = () => {
           {/* View Mode Navigation */}
           <section>
             <div className="flex items-center gap-2 mb-3">
-              <div className="w-4 h-4 rounded-md bg-[#c5a059]/10 flex items-center justify-center">
-                <ArrowRight size={10} className="text-[#c5a059]" />
-              </div>
-              <h2 className="font-display text-[9px] font-bold text-white/35 uppercase tracking-[0.25em]">Çekim Modu</h2>
+              <h2 className="font-display text-[10px] font-semibold text-white/50 uppercase tracking-[0.15em]">Çekim Modu</h2>
             </div>
             <ViewModeNav shootMode={shootMode} onShootModeChange={setShootMode} />
           </section>
@@ -219,10 +214,7 @@ const App: React.FC = () => {
           {/* Creative Assets Section */}
           <section>
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-4 h-4 rounded-md bg-[#c5a059]/10 flex items-center justify-center">
-                <LayoutGrid size={10} className="text-[#c5a059]" />
-              </div>
-              <h2 className="font-display text-[9px] font-bold text-white/35 uppercase tracking-[0.25em]">Kaynak Girişi</h2>
+              <h2 className="font-display text-[10px] font-semibold text-white/50 uppercase tracking-[0.15em]">Kaynak Girişi</h2>
             </div>
             <div className="space-y-4">
               <ImageUploader label="Giysi Referansı" onUpload={setDressUrl} isLoading={isLoading} />
@@ -255,25 +247,22 @@ const App: React.FC = () => {
           {/* Parameters Section */}
           <section>
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-4 h-4 rounded-md bg-[#c5a059]/10 flex items-center justify-center">
-                <Settings2 size={10} className="text-[#c5a059]" />
-              </div>
-              <h2 className="font-display text-[9px] font-bold text-white/35 uppercase tracking-[0.25em]">Parametreler</h2>
+              <h2 className="font-display text-[10px] font-semibold text-white/50 uppercase tracking-[0.15em]">Parametreler</h2>
             </div>
             <div className="space-y-4">
               {/* Quality Badge */}
-              <div className="space-y-3">
-                <label className="text-[10px] font-bold text-white/25 uppercase tracking-widest pl-1">Çıktı Kalitesi</label>
-                <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-[#c5a059]/[0.04] border border-[#c5a059]/15">
-                  <div className="w-2 h-2 rounded-full bg-[#c5a059]" />
-                  <span className="text-[10px] font-bold text-[#c5a059] uppercase tracking-widest">4K Ultra</span>
-                  <span className="text-[8px] text-white/20 font-medium ml-auto">Sabit</span>
+              <div className="space-y-2">
+                <label className="text-[11px] font-medium text-white/40 mb-1 block pl-1">Çıktı Kalitesi</label>
+                <div className="flex items-center gap-3 px-4 py-3 rounded-lg bg-white/[0.02] border border-white/[0.05]">
+                  <div className="w-2 h-2 rounded-full bg-white" />
+                  <span className="text-[11px] font-medium text-white tracking-widest">4K Ultra</span>
+                  <span className="text-[10px] text-white/40 ml-auto">Sabit</span>
                 </div>
               </div>
 
               {/* Seed Input */}
-              <div className="space-y-3">
-                <label className="text-[10px] font-bold text-white/25 uppercase tracking-widest pl-1">Sabit Tohum (Seed)</label>
+              <div className="space-y-2">
+                <label className="text-[11px] font-medium text-white/40 mb-1 block pl-1">Sabit Tohum (Seed)</label>
                 <div className="relative">
                   <input
                     type="number"
@@ -282,7 +271,7 @@ const App: React.FC = () => {
                     onChange={(e) => setSeed(e.target.value ? parseInt(e.target.value) : undefined)}
                     className="input-modern pr-10"
                   />
-                  <Zap size={13} className="absolute right-4 top-1/2 -translate-y-1/2 text-white/10" />
+                  <Zap size={14} className="absolute right-4 top-1/2 -translate-y-1/2 text-white/30" />
                 </div>
               </div>
             </div>
@@ -295,9 +284,9 @@ const App: React.FC = () => {
             whileHover={{ scale: 1.01 }}
             whileTap={{ scale: 0.99 }}
             onClick={() => setShowSettings(true)}
-            className="w-full flex items-center justify-center gap-3 py-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] text-[10px] font-bold text-white/25 uppercase tracking-widest hover:bg-white/[0.04] hover:text-[#c5a059] hover:border-[#c5a059]/20 transition-all duration-300"
+            className="w-full flex items-center justify-center gap-2 py-3 rounded-lg bg-white/[0.02] border border-white/[0.05] text-[11px] font-medium text-white/60 hover:bg-white/[0.05] hover:text-white transition-all duration-200"
           >
-            <Shield size={13} /> Sistem Erişimi
+            <Shield size={14} /> Sistem Erişimi
           </motion.button>
         </div>
       </aside>
