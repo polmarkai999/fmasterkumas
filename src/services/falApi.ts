@@ -1,4 +1,4 @@
-import { fal } from "@fal-ai/client";
+import { fal } from "./falClient";
 import { FRONT_VIEW_PROMPT, BACK_VIEW_PROMPT, CLOSEUP_VIEW_PROMPT, LOCATION_VIEW_PROMPT, OUTDOOR_BACKGROUND_PROMPT } from "./prompt";
 
 export type AIModelId = "fal-ai/fashn/tryon/v1.5" | "fal-ai/idm-vton" | "fal-ai/nano-banana-pro/edit";

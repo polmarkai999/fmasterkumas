@@ -7,7 +7,7 @@ import { ShootModeToggle, ViewSubTabs } from "./components/ViewModeNav";
 import { ViewPage } from "./pages/ViewPage";
 import { ResultGallery } from "./components/ResultGallery";
 import { LandingPage } from "./pages/LandingPage";
-import { fal } from "@fal-ai/client";
+import { fal, initFal } from "./services/falClient";
 import { generateBridalImage, AIModelId, ViewMode } from "./services/falApi";
 import { useAuth } from "./context/AuthContext";
 import { PricingModal } from "./components/PricingModal";
@@ -190,7 +190,7 @@ const App: React.FC = () => {
   useEffect(() => {
     if (falKey) {
       localStorage.setItem("FAL_KEY", falKey);
-      fal.config({ credentials: falKey });
+      initFal();
     }
   }, [falKey]);
 

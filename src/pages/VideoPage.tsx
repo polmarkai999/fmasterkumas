@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, Download, Play, Film, Sparkles, Upload, Image as ImageIcon, X, AlertTriangle, Zap } from "lucide-react";
-import { fal } from "@fal-ai/client";
+import { fal, initFal } from "../services/falClient";
 import { generateVideoFromImage, VIDEO_LOCKED_PROMPT } from "../services/videoApi";
 import { uploadFile } from "../services/falApi";
 import { useAuth } from "../context/AuthContext";
@@ -25,6 +25,7 @@ export const VideoPage: React.FC = () => {
   const [previewUrl, setPreviewUrl] = useState<string>(state.imageUrl || "");
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
   const [progressMsg, setProgressMsg] = useState("Veo 3.1 Pro Başlatılıyor...");
   const [error, setError] = useState<string | null>(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -34,6 +35,11 @@ export const VideoPage: React.FC = () => {
   const { user, credits, deductCredits } = useAuth();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Initialize fal config on mount
+  useEffect(() => {
+    initFal();
+  }, []);
 
   // Auto-generate if we came from the gallery with an image
   useEffect(() => {
@@ -48,10 +54,18 @@ export const VideoPage: React.FC = () => {
       setPreviewUrl(localUrl);
       setVideoUrl(null);
       setError(null);
+      setIsUploading(true);
+
+      // Ensure config is set
+      initFal();
+
       const falUrl = await uploadFile(file);
       setImageUrl(falUrl);
-    } catch (err) {
-      setError("Görsel yüklenirken hata oluştu.");
+    } catch (err: any) {
+      console.error("Upload error:", err);
+      setError(`Görsel yüklenirken hata oluştu: ${err?.message || "Yetkilendirme hatası (401). Lütfen API anahtarınızı kontrol edin."}`);
+    } finally {
+      setIsUploading(false);
     }
   };
 
@@ -63,7 +77,7 @@ export const VideoPage: React.FC = () => {
       return;
     }
 
-    if ((credits ?? 0) < 165) {
+    if ((credits ?? 0) < 185) {
       navigate("/pricing");
       return;
     }
@@ -73,21 +87,19 @@ export const VideoPage: React.FC = () => {
       return;
     }
 
-    const falKey = localStorage.getItem("FAL_KEY") || import.meta.env.VITE_FAL_KEY;
-    if (!falKey) {
+    if (!initFal()) {
       setError("Fal.ai API anahtarı bulunamadı. Stüdyo'ya gidip anahtarı girin.");
       return;
     }
 
-    fal.config({ credentials: falKey });
     setIsGenerating(true);
     setVideoUrl(null);
     setError(null);
     setProgressMsg("Kontürler Doğrulanıyor...");
 
     try {
-      // Deduct 165 credits for video
-      const success = await deductCredits(165);
+      // Deduct 185 credits for video
+      const success = await deductCredits(185);
       if (!success) {
         setError("Kontür düşülemedi. Bakiyenizi kontrol edin.");
         setIsGenerating(false);
@@ -127,14 +139,14 @@ export const VideoPage: React.FC = () => {
   };
 
   return (
-    <div className="fixed inset-0 bg-[#0a0a0a] flex flex-col overflow-hidden">
+    <div className="fixed inset-0 bg-[#0a0a0a] flex flex-col overflow-y-auto md:overflow-hidden">
       {/* Ambient glows */}
       <div className="absolute top-0 right-1/4 w-[500px] h-[300px] rounded-full bg-[#c27ba0]/[0.04] blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 left-1/4 w-[400px] h-[300px] rounded-full bg-[#D4AF37]/[0.03] blur-[100px] pointer-events-none" />
 
       {/* Header */}
-      <header className="relative z-10 h-14 flex items-center justify-between px-6 border-b border-white/[0.05] bg-black/30 backdrop-blur-md flex-shrink-0">
-        <div className="flex items-center gap-4">
+      <header className="relative z-20 h-auto min-h-[3.5rem] flex flex-col md:flex-row items-center justify-between px-4 py-2 md:py-0 md:px-6 border-b border-white/[0.05] bg-black/30 backdrop-blur-md flex-shrink-0 gap-2">
+        <div className="flex items-center justify-between w-full md:w-auto gap-4">
           <motion.button
             whileHover={{ scale: 1.05, x: -2 }}
             whileTap={{ scale: 0.95 }}
@@ -159,41 +171,41 @@ export const VideoPage: React.FC = () => {
         </div>
 
         {/* User / Credits / Auth */}
-        <div className="flex items-center gap-4">
-          {user && (
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-[#D4AF37]/10 border border-[#D4AF37]/20 rounded-full cursor-pointer hover:bg-[#D4AF37]/20 transition-all" onClick={() => navigate("/pricing")}>
-              <Zap size={10} className="text-[#D4AF37] fill-[#D4AF37]" />
-              <span className="text-[10px] font-bold text-[#D4AF37]">{credits ?? 0} Kontür</span>
-            </div>
-          )}
+        <div className="flex items-center justify-between w-full md:w-auto gap-2 md:gap-4">
+          <div className="flex items-center gap-2">
+            {user && (
+              <div className="flex items-center gap-1.5 px-2 md:px-3 py-1 bg-[#D4AF37]/10 border border-[#D4AF37]/20 rounded-full cursor-pointer hover:bg-[#D4AF37]/20 transition-all" onClick={() => navigate("/pricing")}>
+                <Zap size={9} className="text-[#D4AF37] fill-[#D4AF37]" />
+                <span className="text-[9px] md:text-[10px] font-bold text-[#D4AF37] whitespace-nowrap">{credits ?? 0}</span>
+              </div>
+            )}
 
-          {user ? (
-            <div className="w-8 h-8 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/40 flex items-center justify-center text-[#D4AF37] text-xs font-bold uppercase">
-              {user.email?.substring(0, 2)}
-            </div>
-          ) : (
-            <button 
-              onClick={() => setShowAuth(true)}
-              className="px-4 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full text-[10px] font-bold text-white transition-all"
-            >
-              Giriş Yap
-            </button>
-          )}
+            {user ? (
+              <div className="w-7 h-7 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/40 flex items-center justify-center text-[#D4AF37] text-[10px] font-bold uppercase">
+                {user.email?.substring(0, 2)}
+              </div>
+            ) : (
+              <button 
+                onClick={() => setShowAuth(true)}
+                className="px-3 py-1 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full text-[9px] font-bold text-white transition-all whitespace-nowrap"
+              >
+                Giriş
+              </button>
+            )}
+          </div>
 
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#c27ba0]/10 border border-[#c27ba0]/20">
-            <Sparkles size={10} className="text-[#c27ba0]/80" />
-            <span className="text-[9px] font-bold text-[#c27ba0]/80 uppercase tracking-[0.15em]">Veo 3.1 Pro</span>
-            <span className="text-[8px] text-white/20">·</span>
-            <span className="text-[9px] text-white/30 font-medium">8 Saniye</span>
+          <div className="flex items-center gap-1.5 px-2 md:px-3 py-1 rounded-full bg-[#c27ba0]/10 border border-[#c27ba0]/20 max-w-[120px] md:max-w-none overflow-hidden">
+            <Sparkles size={9} className="text-[#c27ba0]/80" />
+            <span className="text-[8px] md:text-[9px] font-bold text-[#c27ba0]/80 uppercase tracking-wider md:tracking-[0.15em] truncate">Veo 3.1</span>
           </div>
         </div>
       </header>
 
       {/* Main layout */}
-      <main className="flex flex-1 overflow-hidden relative z-10">
+      <main className="flex flex-col md:flex-row flex-1 overflow-y-auto md:overflow-hidden relative z-10">
 
         {/* Left: Image Input Panel */}
-        <div className="w-[380px] flex-shrink-0 border-r border-white/[0.05] bg-black/20 flex flex-col p-5 gap-4 overflow-y-auto">
+        <div className="w-full md:w-[380px] flex-shrink-0 border-b md:border-b-0 md:border-r border-white/[0.05] bg-black/20 flex flex-col p-5 gap-4">
 
           {/* Section label */}
           <div className="flex items-center gap-2">
@@ -302,18 +314,27 @@ export const VideoPage: React.FC = () => {
 
           {/* Generate Button */}
           <motion.button
-            whileHover={!isGenerating && !!previewUrl ? { scale: 1.02, y: -2 } : {}}
-            whileTap={!isGenerating && !!previewUrl ? { scale: 0.97 } : {}}
+            whileHover={!isGenerating && !isUploading && !!imageUrl ? { scale: 1.02, y: -2 } : {}}
+            whileTap={!isGenerating && !isUploading && !!imageUrl ? { scale: 0.97 } : {}}
             onClick={() => handleGenerate()}
-            disabled={isGenerating || !previewUrl}
+            disabled={isGenerating || isUploading || (!imageUrl && !previewUrl)}
             className={`relative w-full py-4 rounded-xl font-bold text-[11px] uppercase tracking-[0.25em] transition-all duration-400 overflow-hidden
-              ${previewUrl && !isGenerating
+              ${(imageUrl || previewUrl) && !isGenerating && !isUploading
                 ? "bg-gradient-to-r from-[#c27ba0] to-[#a0607f] text-white shadow-[0_4px_20px_rgba(194,123,160,0.25)] hover:shadow-[0_6px_28px_rgba(194,123,160,0.35)]"
                 : "bg-white/[0.04] text-white/20 cursor-not-allowed border border-white/[0.04]"
               }
             `}
           >
-            {isGenerating ? (
+            {isUploading ? (
+              <span className="flex items-center justify-center gap-2">
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ repeat: Infinity, duration: 1.2, ease: "linear" }}
+                  className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full"
+                />
+                Yükleniyor...
+              </span>
+            ) : isGenerating ? (
               <span className="flex items-center justify-center gap-2">
                 <motion.div
                   animate={{ rotate: 360 }}
@@ -347,7 +368,7 @@ export const VideoPage: React.FC = () => {
         </div>
 
         {/* Center: Video Output */}
-        <div className="flex-1 flex flex-col items-center justify-center p-8 gap-6 overflow-hidden">
+        <div className="flex-1 flex flex-col items-center justify-center p-4 md:p-8 gap-6 overflow-hidden min-h-[400px]">
           <AnimatePresence mode="wait">
             {isGenerating ? (
               <motion.div
