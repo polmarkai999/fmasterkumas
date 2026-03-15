@@ -37,8 +37,16 @@ body {
   color: var(--text-primary);
   font-family: 'Montserrat', sans-serif;
   -webkit-font-smoothing: antialiased;
-  overflow: hidden;
+  min-height: 100vh;
+  /* Allow natural scrolling on mobile, but keep it tight for the dash */
 }
+
+/* Base Utility for full-height segments */
+.h-v-screen {
+  height: 100vh;
+  height: 100dvh; /* Dynamic viewport height for mobile */
+}
+
 
 h1, h2, h3, .font-serif {
   font-family: 'Playfair Display', serif;

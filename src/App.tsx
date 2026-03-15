@@ -34,69 +34,70 @@ const MainHeader: React.FC<{
   const { user, credits, signOut } = useAuth();
   
   return (
-    <header className="h-16 border-b border-white/10 flex items-center justify-between px-4 md:px-6 bg-black/40 backdrop-blur-md z-[100]">
-      <div className="flex items-center space-x-3">
+    <header className="h-14 md:h-16 border-b border-white/10 flex items-center justify-between px-3 md:px-6 bg-black/40 backdrop-blur-md z-[100] sticky top-0">
+      <div className="flex items-center space-x-2 md:space-x-3">
         <button 
           onClick={onToggleSidebar}
-          className="md:hidden text-white/70 hover:text-[#D4AF37] transition-colors"
+          className="md:hidden text-white/70 hover:text-[#D4AF37] transition-colors p-2"
         >
-          <Menu size={20} />
+          <Menu size={18} />
         </button>
         <div 
           onClick={onGoHome}
           className="flex flex-col cursor-pointer group"
         >
           <div className="flex items-center space-x-2">
-            <h1 className="font-serif text-lg md:text-2xl tracking-widest text-[#D4AF37] uppercase leading-none group-hover:text-white transition-colors">Fashion Master</h1>
+            <h1 className="font-serif text-sm md:text-2xl tracking-widest text-[#D4AF37] uppercase leading-none group-hover:text-white transition-colors">Fashion Master</h1>
           </div>
-          <span className="text-[8px] md:text-[10px] tracking-[0.3em] text-gray-400 font-light mt-1 uppercase">Haute Couture Studio</span>
+          <span className="text-[7px] md:text-[10px] tracking-[0.3em] text-gray-400 font-light mt-1 uppercase">Haute Couture Studio</span>
         </div>
       </div>
-      <div className="flex items-center space-x-3 md:space-x-6">
+      <div className="flex items-center space-x-2 md:space-x-6">
         {/* Credits Display */}
         {user && (
-          <div className="flex items-center gap-2 px-3 py-1.5 bg-[#D4AF37]/10 border border-[#D4AF37]/20 rounded-full cursor-pointer hover:bg-[#D4AF37]/20 transition-all" onClick={onOpenPricing}>
-            <Zap size={14} className="text-[#D4AF37] fill-[#D4AF37]" />
-            <span className="text-[11px] font-bold text-[#D4AF37]">{credits ?? 0} Kontür</span>
-            <div className="w-[1px] h-3 bg-[#D4AF37]/30 mx-1"></div>
-            <span className="text-[10px] text-[#D4AF37]/80 uppercase font-black">+ Yükle</span>
+          <div className="flex items-center gap-1.5 md:gap-2 px-2 md:px-3 py-1 md:py-1.5 bg-[#D4AF37]/10 border border-[#D4AF37]/20 rounded-full cursor-pointer hover:bg-[#D4AF37]/20 transition-all" onClick={onOpenPricing}>
+            <Zap size={12} className="text-[#D4AF37] fill-[#D4AF37]" />
+            <span className="text-[10px] md:text-[11px] font-bold text-[#D4AF37]">{credits ?? 0}</span>
+            <span className="hidden xs:inline text-[10px] md:text-[11px] font-bold text-[#D4AF37]"> Kontür</span>
+            <div className="w-[1px] h-3 bg-[#D4AF37]/30 mx-0.5 md:mx-1"></div>
+            <span className="text-[9px] md:text-[10px] text-[#D4AF37]/80 uppercase font-black">+</span>
           </div>
         )}
 
-        <div className="flex items-center space-x-2 md:space-x-4">
+        <div className="flex items-center space-x-1 md:space-x-4">
           <button 
             onClick={onGoHome}
-            className="text-gray-400 hover:text-[#D4AF37] transition-colors p-1"
+            className="hidden sm:flex text-gray-400 hover:text-[#D4AF37] transition-colors p-1"
             title="Giriş Sayfası"
           >
-            <Home size={20} strokeWidth={1.5} />
+            <Home size={18} strokeWidth={1.5} />
           </button>
           <button 
             onClick={onToggleArchive}
-            className="md:hidden text-white/70 hover:text-[#D4AF37] transition-colors p-1"
+            className="md:hidden text-white/70 hover:text-[#D4AF37] transition-colors p-2"
           >
             <Sparkles size={18} />
           </button>
           
           {user ? (
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 md:gap-3">
               <button 
                 onClick={() => signOut()}
                 className="text-gray-400 hover:text-red-400 transition-colors p-1"
                 title="Çıkış Yap"
               >
-                <LogOut size={18} strokeWidth={1.5} />
+                <LogOut size={16} strokeWidth={1.5} />
               </button>
-              <div className="w-8 h-8 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/40 flex items-center justify-center text-[#D4AF37] text-xs font-bold uppercase">
+              <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/40 flex items-center justify-center text-[#D4AF37] text-[10px] font-bold uppercase">
                 {user.email?.substring(0, 2)}
               </div>
             </div>
           ) : (
             <button 
               onClick={onOpenAuth}
-              className="px-4 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full text-[11px] font-bold text-white transition-all flex items-center gap-2"
+              className="px-3 md:px-4 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full text-[10px] md:text-[11px] font-bold text-white transition-all flex items-center gap-2"
             >
-              <UserIcon size={14} /> Giriş Yap
+              <UserIcon size={12} /> <span className="hidden xs:inline">Giriş Yap</span>
             </button>
           )}
         </div>
@@ -106,24 +107,22 @@ const MainHeader: React.FC<{
 };
 
 const BottomStatus: React.FC<{ shootMode: string; engine: string; setShowSettings: (show: boolean) => void }> = ({ shootMode, engine, setShowSettings }) => (
-  <footer className="h-8 bg-black border-t border-white/5 flex items-center px-4 justify-between z-[100]">
+  <footer className="h-8 bg-black/80 backdrop-blur-sm border-t border-white/5 flex items-center px-4 justify-between z-[100] shrink-0">
     <div className="flex items-center space-x-2 md:space-x-4 overflow-hidden">
       <button 
         onClick={() => setShowSettings(true)}
-        className="text-[9px] md:text-[10px] text-gray-500 hover:text-white flex items-center transition-colors flex-shrink-0"
+        className="text-[8px] md:text-[10px] text-gray-500 hover:text-white flex items-center transition-colors flex-shrink-0"
       >
-        <span className="w-1.5 h-1.5 md:w-2 md:h-2 bg-green-500 rounded-full mr-2"></span>
-        <span className="hidden xs:inline">Sistem Erişimi</span>
-        <span className="xs:hidden">Erişim</span>
+        <span className="w-1.5 h-1.5 bg-green-500 rounded-full mr-2 shadow-[0_0_5px_rgba(34,197,94,0.5)]"></span>
+        <span className="hidden xs:inline">Erişim</span>
+        <span className="xs:hidden">FM</span>
       </button>
-      <span className="text-[10px] text-gray-700">|</span>
-      <span className="text-[9px] md:text-[10px] text-gray-500 truncate whitespace-nowrap">Mod: {shootMode.toUpperCase()}</span>
-      <span className="hidden sm:inline text-[10px] text-gray-700">|</span>
-      <span className="hidden sm:inline text-[10px] text-gray-500 truncate whitespace-nowrap">Düğüm: {engine.split('/').pop()?.toUpperCase()}</span>
+      <span className="text-[8px] text-gray-700">|</span>
+      <span className="text-[8px] md:text-[10px] text-gray-500 truncate whitespace-nowrap uppercase">Mod: {shootMode}</span>
     </div>
-    <div className="flex items-center space-x-3 md:space-x-6 text-[9px] md:text-[10px] text-gray-500">
-      <span className="hidden xs:inline">Latans: 42ms</span>
-      <span className="truncate whitespace-nowrap">ID: FM_{new Date().getTime().toString().slice(-5)}</span>
+    <div className="flex items-center space-x-3 md:space-x-6 text-[8px] md:text-[10px] text-gray-500">
+      <span className="hidden sm:inline">V4.2.0</span>
+      <span className="truncate whitespace-nowrap">ID_{new Date().getTime().toString().slice(-4)}</span>
     </div>
   </footer>
 );
@@ -376,7 +375,7 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="app-container flex flex-col h-screen overflow-hidden bg-[#121212] selection:bg-[#D4AF37]/30">
+    <div className="app-container flex flex-col h-screen h-[100dvh] overflow-hidden bg-[#121212] selection:bg-[#D4AF37]/30">
       <MainHeader 
         onToggleSidebar={() => setShowMobileSidebar(!showMobileSidebar)} 
         onToggleArchive={() => setShowMobileArchive(!showMobileArchive)} 
@@ -598,8 +597,8 @@ const App: React.FC = () => {
 
         {/* RightSidebar (Archive) */}
         <aside className={`
-          gallery-panel p-4 flex flex-col overflow-hidden bg-black/40
-          fixed md:relative inset-y-0 right-0 w-80 z-[70] md:z-0
+          gallery-panel p-4 flex flex-col overflow-hidden bg-black/60 backdrop-blur-xl
+          fixed md:relative inset-y-0 right-0 w-full sm:w-80 z-[70] md:z-0
           transform transition-transform duration-300 md:transform-none
           ${showMobileArchive ? 'translate-x-0' : 'translate-x-full md:translate-x-0'}
         `}>

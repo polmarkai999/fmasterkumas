@@ -70,23 +70,23 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
-            className="w-full max-w-md bg-[#121212] border border-white/10 rounded-2xl overflow-hidden shadow-2xl"
+            className="w-full max-w-md bg-[#121212] border border-white/10 rounded-2xl overflow-hidden shadow-2xl max-h-[90vh] overflow-y-auto"
           >
-            <div className="p-8">
-              <div className="flex justify-between items-center mb-8">
+            <div className="p-6 sm:p-8">
+              <div className="flex justify-between items-center mb-6 sm:mb-8">
                 <div>
-                  <h2 className="text-2xl font-bold text-white">
+                  <h2 className="text-xl sm:text-2xl font-bold text-white">
                     Sistem Girişi
                   </h2>
-                  <p className="text-gray-400 text-sm mt-1">
-                    Stüdyoya erişmek için kimlik bilgilerinizi girin
+                  <p className="text-gray-400 text-[11px] sm:text-sm mt-1">
+                    Bilgilerinizi girin
                   </p>
                 </div>
                 <button 
                   onClick={onClose}
                   className="p-2 hover:bg-white/5 rounded-full text-gray-500 hover:text-white transition-all"
                 >
-                  <X size={20} />
+                  <X size={18} />
                 </button>
               </div>
 

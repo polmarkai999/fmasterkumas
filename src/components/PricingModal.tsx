@@ -65,31 +65,31 @@ export const PricingModal: React.FC<PricingModalProps> = ({ isOpen, onClose }) =
             initial={{ scale: 0.9, y: 20, opacity: 0 }}
             animate={{ scale: 1, y: 0, opacity: 1 }}
             exit={{ scale: 0.9, y: 20, opacity: 0 }}
-            className="w-full max-w-5xl bg-[#121212] border border-white/10 rounded-2xl overflow-hidden relative"
+            className="w-full max-w-5xl bg-[#121212] border border-white/10 rounded-2xl overflow-hidden relative max-h-[90vh] flex flex-col"
           >
             {/* Header */}
-            <div className="p-6 md:p-8 border-b border-white/5 flex justify-between items-center bg-black/40">
+            <div className="p-5 md:p-8 border-b border-white/5 flex justify-between items-center bg-black/40 shrink-0">
               <div>
-                <h2 className="text-2xl md:text-3xl font-bold text-white flex items-center gap-3">
-                  <Gem className="text-[#D4AF37]" /> Kontür Paketleri
+                <h2 className="text-xl md:text-3xl font-bold text-white flex items-center gap-3">
+                  <Gem className="text-[#D4AF37] w-5 h-5 md:w-8 md:h-8" /> Paketler
                 </h2>
-                <p className="text-gray-400 text-sm mt-1">İhtiyacınıza uygun paketi seçin, hemen üretmeye başlayın.</p>
+                <p className="text-gray-400 text-[10px] md:text-sm mt-0.5 md:mt-1">İhtiyacınıza uygun paketi seçin.</p>
               </div>
               <button 
                 onClick={onClose}
                 className="p-2 hover:bg-white/5 rounded-full text-gray-400 hover:text-white transition-all"
               >
-                <X size={24} />
+                <X size={20} />
               </button>
             </div>
 
             {/* Content */}
-            <div className="p-6 md:p-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="p-5 md:p-10 grid grid-cols-1 md:grid-cols-3 gap-6 overflow-y-auto overflow-x-hidden custom-scrollbar">
               {PACKAGES.map((pkg) => (
                 <div 
                   key={pkg.id}
                   className={`relative flex flex-col p-6 rounded-xl border transition-all duration-300 ${
-                    pkg.popular ? 'bg-white/5 border-[#D4AF37] scale-105 z-10' : 'bg-black/40 border-white/10 hover:border-white/20'
+                    pkg.popular ? 'bg-white/5 border-[#D4AF37] md:scale-105 z-10' : 'bg-black/40 border-white/10 hover:border-white/20'
                   }`}
                 >
                   {pkg.popular && (
@@ -98,23 +98,23 @@ export const PricingModal: React.FC<PricingModalProps> = ({ isOpen, onClose }) =
                     </div>
                   )}
 
-                  <div className="mb-6">
-                    <h3 className="text-xl font-bold text-white mb-2">{pkg.name}</h3>
+                  <div className="mb-4 sm:mb-6">
+                    <h3 className="text-lg sm:text-xl font-bold text-white mb-1 sm:mb-2">{pkg.name}</h3>
                     <div className="flex items-baseline gap-1">
-                      <span className="text-3xl font-bold text-white">{pkg.price}</span>
-                      <span className="text-gray-500 text-sm">/ Tek Seferlik</span>
+                      <span className="text-2xl sm:text-3xl font-bold text-white">{pkg.price}</span>
+                      <span className="text-gray-500 text-[10px] sm:text-sm">/ Tek Sefer</span>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-2 mb-6 p-3 bg-white/5 rounded-lg border border-white/5">
-                    <Zap size={18} className="text-[#D4AF37]" />
-                    <span className="text-lg font-bold text-white">{pkg.credits} Kontür</span>
+                  <div className="flex items-center gap-2 mb-4 sm:mb-6 p-3 bg-white/5 rounded-lg border border-white/5">
+                    <Zap size={16} className="text-[#D4AF37]" />
+                    <span className="text-base sm:text-lg font-bold text-white">{pkg.credits} Kontür</span>
                   </div>
 
-                  <ul className="space-y-3 mb-8 flex-1">
+                  <ul className="space-y-2 sm:space-y-3 mb-6 sm:mb-8 flex-1">
                     {pkg.benefits.map((benefit, i) => (
-                      <li key={i} className="flex items-start gap-3 text-sm text-gray-400">
-                        <Check size={16} className="text-[#D4AF37] mt-0.5" />
+                      <li key={i} className="flex items-start gap-2 sm:gap-3 text-[11px] sm:text-sm text-gray-400">
+                        <Check size={14} className="text-[#D4AF37] mt-0.5 shrink-0" />
                         {benefit}
                       </li>
                     ))}
@@ -122,7 +122,7 @@ export const PricingModal: React.FC<PricingModalProps> = ({ isOpen, onClose }) =
 
                   <button
                     onClick={() => handlePurchase(pkg)}
-                    className={`w-full py-4 rounded-lg font-bold transition-all flex items-center justify-center gap-2 ${
+                    className={`w-full py-3 sm:py-4 rounded-lg font-bold transition-all flex items-center justify-center gap-2 text-sm ${
                       pkg.popular 
                       ? 'bg-[#D4AF37] text-black hover:bg-[#B8962F]' 
                       : 'bg-white/5 text-white hover:bg-white/10'
@@ -135,14 +135,13 @@ export const PricingModal: React.FC<PricingModalProps> = ({ isOpen, onClose }) =
             </div>
 
             {/* Footer */}
-            <div className="p-6 bg-black/60 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
-              <div className="flex items-center gap-6 text-[10px] text-gray-500 uppercase tracking-widest font-bold">
-                <span className="flex items-center gap-1.5"><Shield size={12} /> Güvenli Ödeme</span>
-                <span className="flex items-center gap-1.5"><Zap size={12} /> Anında Teslim</span>
+            <div className="p-4 sm:p-6 bg-black/60 border-t border-white/5 flex flex-col items-center justify-between gap-3 shrink-0">
+              <div className="flex items-center gap-4 sm:gap-6 text-[8px] sm:text-[10px] text-gray-500 uppercase tracking-widest font-bold">
+                <span className="flex items-center gap-1.5"><Shield size={10} /> Güvenli</span>
+                <span className="flex items-center gap-1.5"><Zap size={10} /> Hızlı</span>
               </div>
-              <p className="text-[11px] text-gray-600 text-center md:text-right">
-                * Fotoğraf üretimi: 4 kontür, Video üretimi: 10 kontür düşer. <br />
-                Tüm fiyatlara KDV dahildir.
+              <p className="text-[9px] sm:text-[11px] text-gray-600 text-center">
+                * Fotoğraf üretimi: 4 kontür, Video üretimi: 10 kontür.
               </p>
             </div>
           </motion.div>
