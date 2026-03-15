@@ -63,7 +63,7 @@ export const VideoPage: React.FC = () => {
       return;
     }
 
-    if ((credits ?? 0) < 10) {
+    if ((credits ?? 0) < 165) {
       navigate("/pricing");
       return;
     }
@@ -86,8 +86,8 @@ export const VideoPage: React.FC = () => {
     setProgressMsg("Kontürler Doğrulanıyor...");
 
     try {
-      // Deduct 10 credits for video
-      const success = await deductCredits(10);
+      // Deduct 165 credits for video
+      const success = await deductCredits(165);
       if (!success) {
         setError("Kontür düşülemedi. Bakiyenizi kontrol edin.");
         setIsGenerating(false);

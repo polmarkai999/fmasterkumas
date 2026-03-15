@@ -6,34 +6,34 @@ import { useAuth } from '../context/AuthContext';
 
 const PACKAGES = [
   {
-    id: 'package_100',
+    id: 'package_1000',
     name: 'Bronz Paket',
-    credits: 100,
-    price: '₺999',
+    credits: 1000,
+    price: '₺1349',
     popular: false,
     color: 'from-[#CD7F32] to-[#A0522D]',
     icon: <Star className="text-[#CD7F32]" size={32} />,
-    benefits: ['100 Üretim Kontörü', '25 Fotoğraf veya 10 Video', 'Standart Öncelikli Render', 'Süresiz Kullanım Hakkı', 'E-posta Desteği']
+    benefits: ['1000 Üretim Kontörü', '15 Fotoğraf veya 6 Video', 'Standart Öncelikli Render', 'Süresiz Kullanım Hakkı', 'E-posta Desteği']
   },
   {
-    id: 'package_250',
+    id: 'package_2500',
     name: 'Gümüş Paket',
-    credits: 250,
-    price: '₺2399',
+    credits: 2500,
+    price: '₺2999',
     popular: true,
     color: 'from-[#C0C0C0] to-[#808080]',
     icon: <Award className="text-[#C0C0C0]" size={32} />,
-    benefits: ['250 Üretim Kontörü', '62 Fotoğraf veya 25 Video', 'Yüksek Öncelikli Render', 'Süresiz Kullanım Hakkı', 'Hızlı Destek Hattı', 'Yeni Modellere Erişim']
+    benefits: ['2500 Üretim Kontörü', '38 Fotoğraf veya 15 Video', 'Yüksek Öncelikli Render', 'Süresiz Kullanım Hakkı', 'Hızlı Destek Hattı', 'Yeni Modellere Erişim']
   },
   {
-    id: 'package_500',
+    id: 'package_5000',
     name: 'Altın Paket',
-    credits: 500,
-    price: '₺4699',
+    credits: 5000,
+    price: '₺5499',
     popular: false,
     color: 'from-[#D4AF37] to-[#B8860B]',
     icon: <Crown className="text-[#D4AF37]" size={32} />,
-    benefits: ['500 Üretim Kontörü', '125 Fotoğraf veya 50 Video', 'VIP Öncelikli Render', 'Süresiz Kullanım Hakkı', '7/24 Teknik Destek', 'Yeni Özelliklere Erken Erişim', 'Özel Filigran Kaldırma']
+    benefits: ['5000 Üretim Kontörü', '76 Fotoğraf veya 30 Video', 'VIP Öncelikli Render', 'Süresiz Kullanım Hakkı', '7/24 Teknik Destek', 'Yeni Özelliklere Erken Erişim', 'Özel Filigran Kaldırma']
   }
 ];
 

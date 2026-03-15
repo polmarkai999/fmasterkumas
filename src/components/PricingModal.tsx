@@ -10,31 +10,31 @@ interface PricingModalProps {
 
 const PACKAGES = [
   {
-    id: 'package_100',
+    id: 'package_1000',
     name: 'Bronz',
-    credits: 100,
-    price: '₺999',
+    credits: 1000,
+    price: '₺1349',
     popular: false,
     color: '#CD7F32',
-    benefits: ['100 Üretim Kontörü', '25 Fotoğraf veya 10 Video', 'Standart Hız', 'Süresiz Kullanım']
+    benefits: ['1000 Üretim Kontörü', '15 Fotoğraf veya 6 Video', 'Standart Hız', 'Süresiz Kullanım']
   },
   {
-    id: 'package_250',
+    id: 'package_2500',
     name: 'Gümüş',
-    credits: 250,
-    price: '₺2399',
+    credits: 2500,
+    price: '₺2999',
     popular: true,
     color: '#C0C0C0',
-    benefits: ['250 Üretim Kontörü', '62 Fotoğraf veya 25 Video', 'Öncelikli Render', 'Süresiz Kullanım', 'Destek Önceliği']
+    benefits: ['2500 Üretim Kontörü', '38 Fotoğraf veya 15 Video', 'Öncelikli Render', 'Süresiz Kullanım', 'Destek Önceliği']
   },
   {
-    id: 'package_500',
+    id: 'package_5000',
     name: 'Altın',
-    credits: 500,
-    price: '₺4699',
+    credits: 5000,
+    price: '₺5499',
     popular: false,
     color: '#D4AF37',
-    benefits: ['500 Üretim Kontörü', '125 Fotoğraf veya 50 Video', 'Ultra Hızlı Render', 'Süresiz Kullanım', 'Vip Destek']
+    benefits: ['5000 Üretim Kontörü', '76 Fotoğraf veya 30 Video', 'Ultra Hızlı Render', 'Süresiz Kullanım', 'Vip Destek']
   }
 ];
 
@@ -141,7 +141,7 @@ export const PricingModal: React.FC<PricingModalProps> = ({ isOpen, onClose }) =
                 <span className="flex items-center gap-1.5"><Zap size={10} /> Hızlı</span>
               </div>
               <p className="text-[9px] sm:text-[11px] text-gray-600 text-center">
-                * Fotoğraf üretimi: 4 kontür, Video üretimi: 10 kontür.
+                * Fotoğraf üretimi: 65 kontür, Video üretimi: 165 kontür.
               </p>
             </div>
           </motion.div>

@@ -253,7 +253,7 @@ const App: React.FC = () => {
       return;
     }
 
-    if ((credits ?? 0) < 4) {
+    if ((credits ?? 0) < 65) {
       handleOpenPricing();
       return;
     }
@@ -278,8 +278,8 @@ const App: React.FC = () => {
       setIsLoading(true);
       setProgressMsg("Kontürler Doğrulanıyor...");
 
-      // Deduct 4 credits for image
-      const success = await deductCredits(4);
+      // Deduct 65 credits for image
+      const success = await deductCredits(65);
       if (!success) {
         alert("Kontür düşülemedi. Lütfen tekrar deneyin.");
         setIsLoading(false);
