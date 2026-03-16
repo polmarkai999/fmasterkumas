@@ -167,8 +167,8 @@ export const VideoPage: React.FC = () => {
               <Film size={13} className="text-[#c27ba0]" strokeWidth={1.5} />
             </div>
             <div>
-              <h1 className="text-[11px] font-bold text-white/80 tracking-wider">Video Stüdyosu</h1>
-              <p className="text-[8px] text-white/25 uppercase tracking-[0.2em]">Görsel → Sinematik Video</p>
+              <h1 className="text-[11px] font-bold text-white/80 tracking-wider">Kumaş Stüdyosu</h1>
+              <p className="text-[8px] text-white/25 uppercase tracking-[0.2em]">Görsel → Kumaş Uygulama</p>
             </div>
           </div>
         </div>

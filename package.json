@@ -1,5 +1,6 @@
+```json
 {
-  "name": "gel2",
+  "name": "fashionmaster-kumas",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
@@ -30,3 +31,4 @@
     "vite-plugin-react": "^4.0.0"
   }
 }
+```

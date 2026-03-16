@@ -78,7 +78,7 @@ export const LandingPage: React.FC<Props> = ({ onSelectPhoto, onSelectVideo, use
           className="mx-auto mb-3 w-40 sm:w-[220px]"
           style={{ mixBlendMode: "screen", opacity: 0.9 }}
         />
-        <p className="text-[8px] sm:text-[9px] text-white/25 font-bold uppercase tracking-[0.45em]">Haute Couture Stüdyo</p>
+        <p className="text-[8px] sm:text-[9px] text-white/25 font-bold uppercase tracking-[0.45em]">FashionMaster Kumaş</p>
       </motion.div>
 
       {/* Tagline */}
@@ -116,7 +116,7 @@ export const LandingPage: React.FC<Props> = ({ onSelectPhoto, onSelectVideo, use
                 Fotoğraf Stüdyosu
               </h2>
               <p className="text-[10px] sm:text-[11px] text-white/30 leading-relaxed group-hover:text-white/45 transition-colors duration-300 line-clamp-2 sm:line-clamp-none">
-                Gelinlik tasarımını yapay zeka ile modele uygula.
+                Seçilen kumaşı yapay zeka ile modele uygula.
               </p>
             </div>
           </div>
