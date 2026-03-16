@@ -107,6 +107,9 @@ export const VideoPage: React.FC = () => {
       }
 
       setProgressMsg("Veo 3.1 Pro Başlatılıyor...");
+      
+      // We'll pass the targetUrl (fabric) as the primary image_url
+      // and keep the video prompt structure.
       const url = await generateVideoFromImage(
         { imageUrl: targetUrl, duration: 8 },
         (msg) => setProgressMsg(msg)

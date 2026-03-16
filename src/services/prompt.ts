@@ -1,4 +1,173 @@
 // ================================================
+// FABRIC APPLY FASHION SYSTEM PROMPT
+// ================================================
+export const FABRIC_APPLY_PROMPT = `
+[START TECHNICAL PROMPT BLOCK]
+------------------------------------------------
+NANO BANANA PRO – FABRIC APPLY FASHION SYSTEM
+
+------------------------------------------------
+ULTRA VOGUE FASHION CAMERA SYSTEM
+
+The image must look like a high-end Vogue or Harper’s Bazaar fashion editorial photograph.
+Professional fashion photography aesthetics.
+
+Camera behavior:
+• shot on an 85mm fashion portrait lens
+• shallow cinematic depth of field
+• natural subject separation from background
+• subtle background blur
+
+Composition style:
+• luxury editorial composition
+• elegant centered framing
+• fashion campaign balance
+
+Lighting style:
+• professional fashion lighting
+• soft diffused key light
+• natural outdoor fill light
+• gentle highlight rolloff on skin and fabric
+
+Model direction:
+• confident editorial posture
+• subtle body angles
+• calm luxury expression
+• cool fashion gaze
+
+Image mood:
+• luxury fashion campaign
+• cinematic editorial photography
+• high-end magazine aesthetic
+
+Prioritize fabric detail and tailoring precision.
+
+------------------------------------------------
+INPUT REFERENCES
+
+Image 1:
+Fabric reference (FABRIC LOCK)
+
+Image 2:
+Model reference (MODEL LOCK)
+
+------------------------------------------------
+GLOBAL RULE
+
+STRICT REFERENCE BASED GENERATION.
+
+The model identity must remain identical to Image 2.
+The fabric from Image 1 must be applied to the clothing worn by the model.
+Only the environment and pose may change.
+
+------------------------------------------------
+FABRIC LOCK – MATERIAL APPLICATION
+
+Treat the fabric in Image 1 as a locked textile material.
+The AI must use this fabric to construct the garment worn by the model.
+
+Preserve exactly:
+• fabric pattern
+• embroidery
+• beadwork
+• color palette
+• texture
+• fabric weave
+
+The fabric must appear naturally tailored into the garment.
+No fabric redesign allowed.
+
+------------------------------------------------
+GARMENT APPLICATION
+
+The garment worn by the model must be made from the reference fabric.
+
+Possible garment types:
+• couture jacket
+• fashion blazer
+• luxury coat
+• high-fashion dress
+• runway fashion suit
+
+Garment must look professionally tailored and realistic.
+Fabric must follow natural folds, seams and tailoring lines.
+
+------------------------------------------------
+MODEL LOCK
+
+Use the same model from Image 2.
+
+Preserve:
+• facial structure
+• eyes
+• lips
+• skin tone
+• proportions
+
+------------------------------------------------
+HAIR LOCK
+
+Hair must remain exactly the same as Image 2.
+
+Preserve:
+• hairstyle
+• hair color
+• hair volume
+
+------------------------------------------------
+ENVIRONMENT
+
+Outdoor luxury editorial environment.
+
+Possible scenes:
+• botanical garden
+• European palace garden
+• luxury architectural plaza
+• elegant outdoor fashion location
+
+The scene must clearly be outdoors.
+
+------------------------------------------------
+LIGHTING
+
+Professional outdoor fashion lighting.
+• natural daylight
+• golden hour softness
+• soft shadows
+• highlights enhancing fabric texture
+
+Lighting must enhance fabric detail and couture craftsmanship.
+
+------------------------------------------------
+CAMERA
+
+Professional fashion photography.
+85mm fashion portrait lens
+cinematic shallow depth of field
+luxury editorial framing
+
+------------------------------------------------
+QUALITY
+
+Ultra photorealistic
+hyper detailed fabric texture
+luxury advertising campaign aesthetic
+
+------------------------------------------------
+NEGATIVE
+
+No fabric change
+No pattern distortion
+No color alteration
+No cartoon style
+No unrealistic fabric
+
+Fabric detail must remain sharp and accurate.
+------------------------------------------------
+[END TECHNICAL PROMPT BLOCK]
+`;
+
+// ================================================
 // FRONT VIEW PROMPT — Original Editorial Front Shot
 // ================================================
 export const FRONT_VIEW_PROMPT = `The gown design, silhouette, lace embroidery, corset structure, and satin overskirt must remain identical to the reference dress.
@@ -163,7 +332,7 @@ Hair must stay loose and down exactly like the reference.
 POSE – CONTROLLED MODERN POSE VARIATION
 ------------------------------------------------
 
-Allow subtle variation in pose for each generation.
+Allow subtle variation in zip pose for each generation.
 
 The model should create elegant modern bridal fashion poses.
 
