@@ -49,10 +49,10 @@ export const generateVideoFromImage = async (
     input: {
       prompt: VIDEO_LOCKED_PROMPT,
       image_url: imageUrl,
-      duration: duration, // Use number instead of "8s"
+      duration: duration,
       aspect_ratio: "9:16",
       resolution: "720p",
-      auto_fix: true // Automatically fix prompt issues
+      auto_fix: true
     } as any,
     logs: true,
     onQueueUpdate: (update: any) => {

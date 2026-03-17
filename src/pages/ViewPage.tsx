@@ -1,7 +1,6 @@
 import React from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { ImageUploader } from "../components/ImageUploader";
-import { AIModelId, ViewMode } from "../services/falApi";
+import { ViewMode } from "../services/falApi";
 import { Play, ArrowRight, Sparkles } from "lucide-react";
 
 interface ViewPageProps {
@@ -12,6 +11,7 @@ interface ViewPageProps {
   onDressUrlChange: (url: string) => void;
   onModelUrlChange: (url: string) => void;
   onLocationUrlChange?: (url: string) => void;
+  onFabricUrlChange?: (url: string) => void;
   isLoading: boolean;
   onGenerate: () => void;
   canGenerate: boolean;
@@ -26,6 +26,7 @@ export const ViewPage: React.FC<ViewPageProps> = ({
   onDressUrlChange,
   onModelUrlChange,
   onLocationUrlChange,
+  onFabricUrlChange,
   isLoading,
   onGenerate,
   canGenerate,
@@ -59,7 +60,7 @@ export const ViewPage: React.FC<ViewPageProps> = ({
       </div>
 
       {/* Upload Zones Grid */}
-      <div className={`grid grid-cols-1 ${viewMode.includes('location') ? 'lg:grid-cols-3' : 'lg:grid-cols-2'} gap-4 sm:gap-8 mb-6 sm:mb-10`}>
+      <div className={`grid grid-cols-1 ${viewMode.includes('location') || ['front', 'back', 'closeup', 'jacket-transfer'].includes(viewMode) ? 'lg:grid-cols-3' : 'lg:grid-cols-2'} gap-4 sm:gap-8 mb-6 sm:mb-10`}>
         {/* Slot 1: Tasarım Girişi */}
         <div className="flex flex-col">
           <label className="text-[9px] sm:text-[11px] uppercase tracking-widest text-gray-400 mb-2 sm:mb-4 font-semibold flex justify-between px-1">
@@ -86,6 +87,17 @@ export const ViewPage: React.FC<ViewPageProps> = ({
               <span className="text-[#D4AF37]/60 italic font-normal">Sahne</span>
             </label>
             <ImageUploader label="Mekan Fotoğrafı" onUpload={onLocationUrlChange!} isLoading={isLoading} />
+          </div>
+        )}
+
+        {/* Slot 3: Kumaş Girişi (Optional for Front/Back/Closeup/Jacket) */}
+        {(viewMode === "front" || viewMode === "back" || viewMode === "closeup" || viewMode === "jacket-transfer") && (
+          <div className="flex flex-col">
+            <label className="text-[9px] sm:text-[11px] uppercase tracking-widest text-gray-400 mb-2 sm:mb-4 font-semibold flex justify-between px-1">
+              <span>Kumaş Girişi</span>
+              <span className="text-[#D4AF37]/60 italic font-normal">Tekstil</span>
+            </label>
+            <ImageUploader label="Kumaş Referansı" onUpload={onFabricUrlChange!} isLoading={isLoading} />
           </div>
         )}
       </div>

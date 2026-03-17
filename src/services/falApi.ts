@@ -1,8 +1,8 @@
 import { fal } from "./falClient";
-import { FRONT_VIEW_PROMPT, BACK_VIEW_PROMPT, CLOSEUP_VIEW_PROMPT, LOCATION_VIEW_PROMPT, OUTDOOR_BACKGROUND_PROMPT } from "./prompt";
+import { FRONT_VIEW_PROMPT, BACK_VIEW_PROMPT, CLOSEUP_VIEW_PROMPT, LOCATION_VIEW_PROMPT, OUTDOOR_BACKGROUND_PROMPT, JACKET_TRANSFER_PROMPT } from "./prompt";
 
 export type AIModelId = "fal-ai/fashn/tryon/v1.5" | "fal-ai/idm-vton" | "fal-ai/nano-banana-pro/edit";
-export type ViewMode = "front" | "back" | "closeup" | "location" | "location-closeup";
+export type ViewMode = "front" | "back" | "closeup" | "location" | "location-closeup" | "jacket-transfer";
 
 export interface GenerationParams {
   modelId: AIModelId;
@@ -13,6 +13,7 @@ export interface GenerationParams {
   numSamples?: number;
   viewMode?: ViewMode;
   locationImageUrl?: string;
+  fabricImageUrl?: string;
 }
 
 const getPromptForView = (viewMode: ViewMode): string => {
@@ -25,6 +26,8 @@ const getPromptForView = (viewMode: ViewMode): string => {
       return LOCATION_VIEW_PROMPT;
     case "location-closeup":
       return OUTDOOR_BACKGROUND_PROMPT;
+    case "jacket-transfer":
+      return JACKET_TRANSFER_PROMPT;
     case "front":
     default:
       return FRONT_VIEW_PROMPT;
@@ -41,6 +44,8 @@ const getDescriptionForView = (viewMode: ViewMode): string => {
       return "The gown design, silhouette, lace embroidery, corset structure, and satin overskirt must remain identical to the reference dress. Elegant professional bridal couture transfer onto model — ON-LOCATION SHOOT. Place the dressed model naturally into the venue/location environment. Match lighting, perspective, and atmosphere of the location.";
     case "location-closeup":
       return "The gown design, silhouette, lace embroidery, corset structure, and satin overskirt must remain identical to the reference dress. Create an outdoor luxury fashion photography background for waist-up bridal portrait. No people. Historic European castle with botanical garden. Cinematic depth of field.";
+    case "jacket-transfer":
+      return "Use Image 1 only as the fabric reference and Image 2 as the exact jacket/mannequin reference, then recreate Image 2 exactly as it is with absolutely no changes to the jacket design, cut, lapels, buttons, pockets, mannequin, shirt, scarf, pose, background, lighting, framing, or environment, and replace only the jacket fabric with the exact fabric from Image 1.";
     case "front":
     default:
       return "The gown design, silhouette, lace embroidery, corset structure, and satin overskirt must remain identical to the reference dress. Elegant professional bridal couture transfer onto model";
@@ -48,7 +53,7 @@ const getDescriptionForView = (viewMode: ViewMode): string => {
 };
 
 export const generateBridalImage = async (params: GenerationParams, onUpdate?: (update: any) => void) => {
-  const { modelId, garmentImageUrl, modelImageUrl, seed, quality = "balanced", numSamples = 1, viewMode = "front", locationImageUrl } = params;
+  const { modelId, garmentImageUrl, modelImageUrl, seed, quality = "balanced", numSamples = 1, viewMode = "front", locationImageUrl, fabricImageUrl } = params;
 
   if (modelId === "fal-ai/fashn/tryon/v1.5") {
     return await fal.subscribe("fal-ai/fashn/tryon/v1.5", {
@@ -85,6 +90,9 @@ export const generateBridalImage = async (params: GenerationParams, onUpdate?: (
   const imageUrls = [garmentImageUrl, modelImageUrl];
   if ((viewMode === "location" || viewMode === "location-closeup") && locationImageUrl) {
     imageUrls.push(locationImageUrl);
+  }
+  if (fabricImageUrl) {
+    imageUrls.push(fabricImageUrl);
   }
 
   return await fal.subscribe("fal-ai/nano-banana-pro/edit", {

@@ -1,5 +1,5 @@
 import React from "react";
-import { Eye, RotateCcw, Focus, Camera, MapPin } from "lucide-react";
+import { Eye, RotateCcw, Focus, Camera, MapPin, Sparkles } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -37,6 +37,14 @@ const studioTabs: ViewTab[] = [
     label: "Yakın Plan",
     sublabel: "Detay Odağı",
     icon: <Focus size={16} />,
+    color: "#D4AF37",
+  },
+  {
+    key: "jacket-transfer",
+    path: "/jacket-transfer",
+    label: "Ceket Transferi",
+    sublabel: "Birebir Değişim",
+    icon: <Sparkles size={16} />,
     color: "#D4AF37",
   },
 ];
@@ -103,6 +111,7 @@ export const ViewSubTabs: React.FC<ViewSubTabsProps> = ({ shootMode }) => {
     if (location.pathname === "/closeup") return "closeup";
     if (location.pathname === "/location") return "location";
     if (location.pathname === "/location-closeup") return "location-closeup";
+    if (location.pathname === "/jacket-transfer") return "jacket-transfer";
     return "front";
   };
 

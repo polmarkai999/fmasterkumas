@@ -160,6 +160,7 @@ const App: React.FC = () => {
   const [dressUrl, setDressUrl] = useState<string>("");
   const [modelUrl, setModelUrl] = useState<string>("");
   const [locationUrl, setLocationUrl] = useState<string>("");
+  const [fabricUrl, setFabricUrl] = useState<string>("");
   const [engine, setEngine] = useState<AIModelId>("fal-ai/nano-banana-pro/edit");
   const [results, setResults] = useState<GenerationResult[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -184,6 +185,7 @@ const App: React.FC = () => {
     if (location.pathname === "/closeup") return "closeup";
     if (location.pathname === "/location") return "location";
     if (location.pathname === "/location-closeup") return "location-closeup";
+    if (location.pathname === "/jacket-transfer") return "jacket-transfer";
     return "front";
   };
 
@@ -298,6 +300,7 @@ const App: React.FC = () => {
         quality: quality,
         viewMode: viewMode,
         locationImageUrl: (viewMode === "location" || viewMode === "location-closeup") ? locationUrl : undefined,
+        fabricImageUrl: fabricUrl || undefined,
       }, (update) => {
         if (update.status === "IN_PROGRESS") {
           const lastLog = update.logs?.[update.logs.length - 1]?.message || "Sanal Couture İşleniyor...";
@@ -502,6 +505,7 @@ const App: React.FC = () => {
                   viewMode="front"
                   onDressUrlChange={setDressUrl}
                   onModelUrlChange={setModelUrl}
+                  onFabricUrlChange={setFabricUrl}
                   isLoading={isLoading}
                   onGenerate={handleGenerate}
                   canGenerate={!!dressUrl && !!modelUrl}
@@ -519,6 +523,7 @@ const App: React.FC = () => {
                   viewMode="back"
                   onDressUrlChange={setDressUrl}
                   onModelUrlChange={setModelUrl}
+                  onFabricUrlChange={setFabricUrl}
                   isLoading={isLoading}
                   onGenerate={handleGenerate}
                   canGenerate={!!dressUrl && !!modelUrl}
@@ -536,6 +541,7 @@ const App: React.FC = () => {
                   viewMode="closeup"
                   onDressUrlChange={setDressUrl}
                   onModelUrlChange={setModelUrl}
+                  onFabricUrlChange={setFabricUrl}
                   isLoading={isLoading}
                   onGenerate={handleGenerate}
                   canGenerate={!!dressUrl && !!modelUrl}
@@ -572,9 +578,28 @@ const App: React.FC = () => {
                   onDressUrlChange={setDressUrl}
                   onModelUrlChange={setModelUrl}
                   onLocationUrlChange={setLocationUrl}
+                  onFabricUrlChange={setFabricUrl}
                   isLoading={isLoading}
                   onGenerate={handleGenerate}
                   canGenerate={!!dressUrl && !!modelUrl && !!locationUrl}
+                  progressMsg={progressMsg}
+                />
+              }
+            />
+            <Route
+              path="/jacket-transfer"
+              element={
+                <ViewPage
+                  title="Ceket Transferi"
+                  subtitle="Birebir Kumaş Transfer Modu"
+                  accentColor="#D4AF37"
+                  viewMode="jacket-transfer"
+                  onDressUrlChange={setDressUrl}
+                  onModelUrlChange={setModelUrl}
+                  onFabricUrlChange={setFabricUrl}
+                  isLoading={isLoading}
+                  onGenerate={handleGenerate}
+                  canGenerate={!!dressUrl && !!modelUrl}
                   progressMsg={progressMsg}
                 />
               }

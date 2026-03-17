@@ -183,6 +183,9 @@ Wedding dress on mannequin (MASTER GARMENT REFERENCE)
 Image 2:
 Female model reference (MODEL IDENTITY REFERENCE)
 
+Image 3:
+Fabric reference (FABRIC LOCK - Optional)
+
 ------------------------------------------------
 MASTER RULE
 ------------------------------------------------
@@ -203,7 +206,9 @@ Remove the mannequin completely.
 
 Place the exact same bridal gown from Image 1 onto the woman from Image 2.
 
-The garment must remain unchanged.
+If Image 3 is provided, REPLACE the fabric of the gown with the exact fabric from Image 3. Preserve the design of Image 1 but apply the texture, pattern, and material of Image 3.
+
+The gown must remain visually identical in silhouette to the original reference.
 
 The dress must appear naturally worn by the model.
 
@@ -227,6 +232,7 @@ Preserve all garment design elements exactly:
 • train structure
 • appliqué placements
 • stitching details
+• buttons and hardware details exactly as they appear in Image 1
 
 Do NOT redesign the gown.
 
@@ -438,6 +444,9 @@ Wedding dress on mannequin (MASTER GARMENT REFERENCE)
 Image 2:
 Female model reference (MODEL IDENTITY REFERENCE)
 
+Image 3:
+Fabric reference (FABRIC LOCK - Optional)
+
 ------------------------------------------------
 MASTER RULE
 ------------------------------------------------
@@ -500,7 +509,9 @@ Remove the mannequin completely.
 
 Place the exact same bridal gown from Image 1 onto the woman from Image 2.
 
-The garment must remain unchanged.
+If Image 3 is provided, REPLACE the fabric of the gown with the exact fabric from Image 3. Preserve the design of Image 1 but apply the texture, pattern, and material of Image 3.
+
+The gown must remain visually identical in silhouette to the original reference.
 
 The dress must appear naturally worn by the model.
 
@@ -524,6 +535,7 @@ Preserve all garment design elements exactly:
 • train structure and length
 • back appliqué placements
 • back stitching details
+• buttons and hardware details exactly as they appear
 
 Do NOT redesign the gown.
 
@@ -717,7 +729,7 @@ Image 2:
 Female model reference (MODEL IDENTITY REFERENCE)
 
 Image 3:
-Seamless infinity studio background reference
+Fabric reference (FABRIC LOCK - Optional)
 
 ------------------------------------------------
 MASTER RULE
@@ -739,7 +751,9 @@ Remove the mannequin completely.
 
 Place the exact same bridal gown from Image 1 onto the woman from Image 2.
 
-The garment must remain unchanged.
+If Image 3 is provided, REPLACE the fabric of the gown with the exact fabric from Image 3. Preserve the design of Image 1 but apply the texture, pattern, and material of Image 3.
+
+The gown must remain visually identical in silhouette to the original reference.
 
 The dress must appear naturally worn by the model.
 
@@ -760,6 +774,7 @@ Preserve all garment design elements exactly:
 • waist structure
 • appliqué placements
 • stitching details
+• buttons and hardware details exactly as they appear in Image 1
 
 Do NOT redesign the gown.
 
@@ -901,19 +916,12 @@ Focus on:
 Maximum couture detail visibility.
 
 ------------------------------------------------
-BACKGROUND LOCK (IMAGE 3)
+BACKGROUND
 ------------------------------------------------
 
-Use Image 3 as the exact studio background.
+Seamless infinity studio background.
 
-Do NOT change:
-
-• background color
-• gradient
-• lighting direction
-• light intensity
-
-The model must stand in front of the exact same background.
+Neutral tone matching the reference model background.
 
 ------------------------------------------------
 LIGHTING
@@ -1316,3 +1324,58 @@ No watermark.   portrait background compression with soft botanical garden blur
 ------------------------------------------------
 [END TECHNICAL PROMPT BLOCK]
 `;
+
+// ================================================
+// JACKET TRANSFER PROMPT — Exact Scene Replication
+// ================================================
+export const JACKET_TRANSFER_PROMPT = `
+[START TECHNICAL PROMPT BLOCK]
+------------------------------------------------
+JACKET FABRIC TRANSFER SYSTEM (CRITICAL)
+
+INPUT REFERENCES:
+Image 1: Fabric reference ONLY (FABRIC LOCK)
+Image 2: Exact jacket/mannequin reference (MASTER SCENE REFERENCE)
+
+------------------------------------------------
+MASTER RULE: EXACT SCENE REPLICATION
+------------------------------------------------
+RECREATE IMAGE 2 EXACTLY AS IT IS.
+The AI must perform a hyper-photorealistic textile transfer while keeping every other pixel from Image 2 identical.
+
+------------------------------------------------
+LOCKED ELEMENTS (ABSOLUTELY NO CHANGES)
+------------------------------------------------
+Do NOT change or alter any of the following from Image 2:
+• Jacket design, cut, and silhouette
+• Lapels and collar structure
+• Buttons and buttonhole details (EXACT MATCH)
+• All hardware, zippers, and metallic details
+• Pocket placement and style
+• Mannequin appearance and position
+• Shirt, tie, or neckwear details
+• Scarf draping and texture
+• Model/Mannequin pose and angle
+• Background environment and all details
+• Lighting direction and intensity
+• Camera framing, focal length, and composition
+
+------------------------------------------------
+FABRIC TRANSFER TASK (ONLY CHANGE)
+------------------------------------------------
+REPLACE ONLY THE JACKET FABRIC with the exact fabric from Image 1.
+The fabric from Image 1 must be:
+• Hyper-photorealistic
+• Hyper-detailed and realistic textile transfer result
+• Naturally mapped to the jacket's exact geometry and folds
+
+------------------------------------------------
+QUALITY TARGET
+------------------------------------------------
+Ultra photorealistic
+Hyper detailed textile micro-texture
+High-end fashion photography quality
+------------------------------------------------
+[END TECHNICAL PROMPT BLOCK]
+`;
+

@@ -95,7 +95,7 @@ export const VideoPage: React.FC = () => {
     setIsGenerating(true);
     setVideoUrl(null);
     setError(null);
-    setProgressMsg("Kontürler Doğrulanıyor...");
+    setProgressMsg("Veo 3.1 Pro Başlatılıyor...");
 
     try {
       // Deduct 185 credits for video
@@ -108,8 +108,6 @@ export const VideoPage: React.FC = () => {
 
       setProgressMsg("Veo 3.1 Pro Başlatılıyor...");
       
-      // We'll pass the targetUrl (fabric) as the primary image_url
-      // and keep the video prompt structure.
       const url = await generateVideoFromImage(
         { imageUrl: targetUrl, duration: 8 },
         (msg) => setProgressMsg(msg)
@@ -461,7 +459,7 @@ export const VideoPage: React.FC = () => {
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.97 }}
                     onClick={downloadVideo}
-                    className="flex-1 flex items-center justify-center gap-2.5 py-3.5 rounded-xl bg-gradient-to-r from-[#c27ba0] to-[#a0607f] text-white font-bold text-[11px] uppercase tracking-[0.2em] shadow-[0_4px_20px_rgba(194,123,160,0.25)] hover:shadow-[0_6px_28px_rgba(194,123,160,0.35)] transition-shadow duration-300"
+                    className="flex-1 flex items-center justify-center gap-2.5 py-3.5 rounded-xl bg-gradient-to-r from-[#c27ba0] to-[#a0607f] text-white font-bold text-[11px] uppercase tracking-[0.2em] shadow-[0_4px_20px_rgba(194,123,160,0.25)] hover:shadow-[0_66px_28px_rgba(194,123,160,0.35)] transition-shadow duration-300"
                   >
                     <Download size={14} />
                     Videoyu İndir
